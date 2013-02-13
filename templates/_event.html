@@ -1,0 +1,32 @@
+{% macro pretty_date(date) -%}{{ date.strftime("%l")|trim() }}{% if date.minute > 0 %}{{ date.strftime(":%M") }}{% endif %}{{ date.strftime("%p")|lower() }}{% endmacro -%}
+{% macro render_item(name, value) -%}
+{% if value -%}
+  <tr><th>{{ name }}:</th><td>{{ value }}</td></tr>
+{% endif %}
+{% endmacro -%}
+{% macro render_metadata(event) %}
+<table class="metadata">
+<tbody>
+  {{ render_item("Cost", event.cost) }}
+  {{ render_item("Member Cost", event.cost_member) }}
+  {{ render_item("Teacher", event.teacher) }}
+  {{ render_item("Class Size", event.class_size) }}
+  {{ render_item("To RSVP", event.rsvp_email and " ") }}
+  {% if event.rsvp_email -%}
+      <tr><td colspan="2">{{ event.rsvp_email }}</td></tr>
+  {% endif -%}
+  {% if event.rsvp_link -%}
+      <tr><td colspan="2" class="rsvp"><a href="{{ event.rsvp_link }}" class="btn btn-primary btn-large">Click to RSVP &raquo;</a></td></tr>
+  {% endif -%}
+</tbody>
+</table>
+{% endmacro %}
+
+<h2>{{ event.title|wordwrap(22)|replace('\n', '<br/>') }}</h2>
+<h3>{{ event.date.strftime("%d %B %Y") }}
+<span class="time">{{ pretty_date(event.date) }}&ndash;{{ pretty_date(event.end_date) }}</span></h3>
+
+<div class="content">
+  {{ event.content|safe|urlize(32)|emailify }}
+</div>
+{{ render_metadata(event) }}

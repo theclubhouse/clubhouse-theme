@@ -1,78 +1,513 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <title>{% block windowtitle %}{{ SITENAME }}{% endblock %}</title>
-    <meta name="description" content="">
-    <meta name="author" content="{{ AUTHOR }}">
-    {% if FEED_ATOM %}
-    <link href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
-    {% endif %}
-    {% if FEED_RSS %}
-    <link href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
-    {% endif %}
+<html>
+	<head>
+		<title>theClubhouse &mdash; Augusta, GA co-working &amp; collaboration space</title>
+<!-- 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+		<meta name="description" content="Coworking &amp; hackerspace in downtown Augusta, GA">
+		<meta property="og:title" content="theClubhou.se" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://theclubhou.se" />
+		<meta property="og:image" content="http://theclubhou.se/assets/img/logo-theclubhouse-web-sm.png" />
+		<meta property="og:site_name" content="theClubhou.se" />
 
-    <!-- Le styles -->
-    <link href="{{ SITEURL }}/theme/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-      padding-top: 60px;
-      padding-bottom: 40px;
-      }
-      .sidebar-nav {
-      padding: 9px 0;
-      }
-    </style>
-    <link href="{{ SITEURL }}/theme/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="{{ SITEURL }}/theme/local.css" rel="stylesheet">
-    <link href="{{ SITEURL }}/theme/pygments.css" rel="stylesheet">
-    {% include "analytics.html" %}
-    {% include "disqus.html" %}
-  </head>
-  <body>
-<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
-    {% include "facebook.html" %}
-    {% include "github.html" %}
-    
-    {% include "_header.html" %}
+		<meta charset="utf-8">
+		<link href="assets/css/bootstrap.css" rel="stylesheet">
+		<style type="text/css">
+	      body {
+            font-family: "proxima-nova-soft", "helvetica neue", "helvetica", "arial", sans-serif;
+  	        padding-top: 15px;
+	        padding-bottom: 40px;
+	        font-size: 16px;
+	        line-height: 23px;
+/*		font-weight: 100;*/
+	      }
+	      .super-container {
+	          background: #fffbf0 url('assets/img/paper-torn.png') top left repeat-x;
+	          background-color: #a8d1e1;
+	          padding: 50px;
+/*  	          background-color: #fff1cc; */
+	      }
+	      .white-edge {
+	          background: #ffffff url('assets/img/paper-torn-up.png') top left repeat-x;
+	          background-color: #a8d1e1;
+	          padding-top: 31px;
+	      }
+	      .white-container {
+    	      padding-top: 40px;
+	      }
+	      .container {
+	      }
+	      #home {
+	        margin-bottom: 30px;
+	        background-color: #fff;
+	      }
+	      #about {
+		      padding-top: 60px;
+	      }
+	      #appoint {
+		      padding-top: 60px;
+	      }
+	      .navbar {
+  		      font-family: "proxima-nova-soft", sans-serif;
+  		      font-weight: 300;
+  		      font-size: 18px;
+  		      letter-spacing: 0.5%;
+/*               position: relative; */
+	      }
+	      .navbar-static {
+    	      margin-bottom: 40px;
+	      }
+            .pull-center {
+                text-align: center;
+            }
+            .pull-center > .nav {
+                float:none;
+                display:inline-block;
+                *display: inline; *zoom: 1;
+                height: 32px;
+            }
 
-    <div class="container-fluid">
-      <div class="row-fluid">
-	<div class="span1">&nbsp;</div>
-	<div class="span10">
-	  <div class="row-fluid">
-            <div class="span9">
-	      {% block indextitle %}
-	      <div class="page-header">
-		<h1>{% block title %} {{ self.windowtitle() }} {% endblock %}</h1>
+           .navbar .brand {
+            background-image: url("assets/img/logo-theclubhouse-textonly2-rgb.png");
+            background-attachment: top left;
+            background-size: auto 40px;
+            background-repeat: no-repeat;
+            color: transparent;
+            margin-left: 0px;
+            margin-right: -40px;
+            position: absolute;
+            left: 0px;
+            width: 293px;
+	      }
+	      .navbar.active {
+    	      background-color: transparent;
+	      }
+	      .fancy-c {
+      	      position: absolute;
+    	      top: -90px;
+    	      left: 0px;
+    	      width: 100%;
+    	      height: 216px;
+    	      background-image: url("assets/img/logo-theclubhouse-web-sm.png");
+    	      background-position: 0px 0px;
+    	      background-repeat: no-repeat;
+	      }
+
+	      #members .row {
+	         margin-bottom: 16px;
+	      }
+	      h1 {
+  		      font-family: "proxima-nova-sc-osf-condensed", sans-serif !important;
+/*   		      font-family: "lobster", "helvetica", sans-serif !important; */
+  		      font-weight: 600;
+  		      letter-spacing: -2px !important;
+  		      line-height: 85% !important;
+	      }
+	      .hero-unit p {
+    	      color: #fff;
+    	      font-size: 22px;
+    	      line-height: 34px;
+	      }
+	      .massive {
+	          padding-top: 55px;
+	      }
+	      .massive h1 {
+	          font-size: 66px;
+     	      margin-bottom: 16px;
+     	      text-align: right;
+	      }
+	      .massive span {
+    	      font-family: "proxima-nova-soft";
+    	      color: #ff3900;
+    	      letter-spacing: -4px;
+    	      font-size: 65px;
+	      }
+	      .about {
+	         background-color: #26AAE1;
+	      }
+	      h2 {
+/* 			color: #679b00; */
+/* 	         color: #26AAE1; */
+    	      color: #ff3900;
+  		      font-family: "proxima-nova-sc-osf-condensed", sans-serif !important;
+  		      font-weight: 600;
+  		      letter-spacing: -0.5%;
+	      }
+	      h2.title {
+		      font-size: 48px;
+		      margin-bottom: 24px;
+	      }
+	      section {
+	          margin-top: -60px;
+	          padding-top: 60px;
+	      }
+	      #about {
+    	      margin-top: 0px;
+	      }
+	      hr {
+		      margin-top: 55px;
+		      margin-bottom: 64px;
+	      }
+	      div.logo {
+    	      margin-top: 50px;
+	      }
+	      .event h2 {
+    	      font-family: "proxima-nova-soft" !important;
+	      }
+	      .event h3 {
+    	      margin-bottom: 12px;
+	      }
+	      h2.smooth {
+    	      font-family: "proxima-nova-soft" !important;
+    	      font-size: 28px;
+    	      line-height: 44px;
+	      }
+	      .event h3 .time {
+    	         display: block;
+	      }
+	      .event .metadata th {
+	         text-align: left;
+	      }
+	      .event .metadata .rsvp {
+	        text-align: center;
+	        padding: 14px 0px;
+	      }
+	    </style>
+<!-- 	    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
+	      <script type="text/javascript" src="//use.typekit.net/qub2mvw.js"></script>
+	      <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	</head>
+	<body data-spy="scroll" data-offset="100">
+	<div class="logo-container">
+	  <div class="container">
+	    <section id="home">
+	      <div class="row logo">
+    	   <div class="span4 offset5">
+		     <img src="assets/img/logo-theclubhouse-web-sm.png" alt="logo">
+		    </div>
 	      </div>
-	      {% endblock %}
-	      {% block content %}{% endblock %}
-            </div><!--/span-->
-
-	    <div class="span3">
-	      {% include "_sidebar.html" %}
-            </div><!--/span-->
-
+	    </section>
 	  </div>
 	</div>
-      </div><!--/row-->
+	    <div class="navbar navbar-fixed-top" id="navbar">
+	      <div class="navbar-inner">
+	          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </a>
+	          <a class="brand" href="#">theClubhou.se</a>
+	          <div class="nav-collapse pull-center">
+	            <ul class="nav">
+	              <li><a href="#about">About</a></li>
+<!-- 	              <li><a href="#projects">theProjects</a></li> -->
+<!-- 	              <li><a href="#members">theMembers</a></li> -->
+	              <li><a href="#events">Events</a></li>
+	              <li><a href="#clubs">theClubs</a></li>
+	            </ul>
+	          </div><!--/.nav-collapse -->
+	        </div>
+	      </div>
+	    <div class="super-container">
+	    <div class="container">
+	    <section id="about">
+	      <div class="row">
+              <div class="span4 massive">
+                  <h1>Think,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/> create,&nbsp;&nbsp;&nbsp;&nbsp;<br/> <span>collaborate.</span></h1>
+              </div>
 
-      <hr>
+    	      <div class="hero-unit span6 about">
+    	          <p><strong>theClubhou.se is the place where ideas come to life.</strong></p>
+    	          <p>A place where the best and brightest of Augusta's tech crowd <strong>get together and make great ideas happen.</strong></p>
 
-      <footer>
-        <p>Powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a></p>
-	<p>&copy; {{ AUTHOR }} 2012</p>
-      </footer>
+              </div>
+	      </div>
+	      <hr/>
+	      <div class="row">
+<!--
+	      <div class="span2 well">
+   	          <blockquote>
+	              <p>An artist must not be bound, except by the realization of the idea.</p>
+	              <small>Michelangelo</small>
+	          </blockquote>
+	      </div>
+-->
+	      <div class="span7">
+	          <h3>We are a space for bringing creations to life.</h3>
 
-    </div><!--/.fluid-container-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ SITEURL }}/theme/js/jquery-1.7.2.min.js"><\/script>')</script>
-      <script src="{{ SITEURL }}/theme/bootstrap/js/bootstrap.min.js"></script>
-      <script src="{{ SITEURL }}/theme/js/modernizr-2.5.3-respond-1.1.0.min.js"></script>
+	          <p>More than just thinking, we believe in <strong>executing</strong> as many ideas as we can.  Good ideas can change the world!</p>
+	          
+	          <p>theClubhou.se is something completely new &mdash; Leonardo Da Vinci's Inventor's Workshop re-imagined for the 21st century&hellip; and beyond.</p>
+	          
+	          <h3>We empower &amp; enable.</h3>
+	          <p>They're all in one spot: tools for drawing, planning, prototyping, and building almost any project.</p>
+	          <p>More than just tools, we bring together <strong>minds</strong> &mdash; together we are strong.  By working with other experienced professionals and hobbyists <strong>launch your ideas farther &amp; faster than ever before.</strong></p>
+	          
+	          <h3>Give your ideas a jet engine.</h3>
+	          
+	          <p>Our goal is to remove any obstacles in the path from an idea's conception to its delivery.  Need tools?  We've got 'em.  Want to make your idea into a business?  Don't know how to build something?  Let's figure it out together!</p>
+	          
+	          <p>Whether you want to design an app, a robot, a business, a racecar, or even a simple lamp theClubhou.se can help you make it a reality.</p>
+	      </div>
 
-  </body>
+	      <div class="offset1 span3 event well">
+		{% block featured_event %}{% endblock %}
+
+		<p><a href="#events">More Events &raquo;</a><br/></p>
+
+		    <address>
+    		    <strong>theClubhou.se</strong><br/>
+    		    816 Broad St.<br/>
+    		    Augusta, GA 30904
+		    </address>
+	      </div>
+	    </div><br/><br/>
+	    <div class="row">
+       		<div class="span4">
+    		  <h2>Interested?!  Intrigued?</h2>
+    		  <p><a href="mailto:heythere@theclubhou.se">Drop us a line</a>, or swing by one of our <a href="#events">public events</a>, we'd love to meet you.</p>
+    		  <p>Currently accepting new members!</p>
+    		</div>
+    		<div class="span4">
+    		    <h2>Location</h2>
+    		    <address>
+        		    <strong>theClubhou.se</strong><br/>
+        		    816 Broad St.<br/>
+        		    Augusta, GA 30904
+    		    </address>
+    		    <p><em>Across from the Augusta Commons!</em></p>
+    		</div>
+    		<div class="span2">
+    		  <h2>Let's socialize</h2>
+    		  <dl>
+        		  <dt>Twitter</dt><dd><a href="https://twitter.com/_clubhouse">@_clubhouse</a></dd>
+        		  <dt>FB</dt><dd><a href="https://www.facebook.com/theClubhouseAugusta">The Clubhouse</a></dd>
+<!--         		  <dt>g+</dt><dd><a href="">g+</a></dd> -->
+    		  </dl>
+    		</div>
+        </div>
+	    </section>
+	    </div>
+	    </div>
+	    <div class="white-edge">
+	    </div>
+
+	    <div class="white-container">
+	    <div class="container">
+
+	    <section id="projects" style="display: none;">
+	      <div class="row">
+    		<div class="span4">
+    		  <h2 class="title">Projects</h2>
+    		</div>
+	      </div>
+	      <div class="row">
+	      	<div class="span12">
+		  <ul class="thumbnails">
+		    <li class="span4">
+		      <div class="thumbnail">
+			<img src="http://placehold.it/300x200" alt="Project Photo"/>
+			<h2>Project Lighthouse</h2>
+			<p>Raw denim williamsburg fanny pack jean shorts voluptate deserunt. Fugiat aliqua photo booth hoodie enim nesciunt, irure PBR next level shoreditch whatever. </p>
+		      </div>
+		    </li>
+		    <li class="span4">
+		      <div class="thumbnail">
+			<img src="http://placehold.it/300x200" alt="Project Photo"/>
+			<h2>Hack for Education</h2>
+			<p>Qui cupidatat vero, gastropub godard aesthetic quinoa delectus leggings beard raw denim scenester.</p>
+		      </div>
+		    </li>
+		    <li class="span4">
+		      <div class="thumbnail">
+			<img src="http://placehold.it/300x200" alt="Project Photo"/>
+			<h2>Moon Rocket</h2>
+			<p>Godard chambray do aesthetic voluptate mumblecore, in polaroid. Portland retro fixie, laboris eu direct trade synth. Aliquip 8-bit pariatur gastropub.</p>
+		      </div>
+		    </li>
+		    <li class="span2">
+		      <div class="thumbnail">
+			<img src="http://placehold.it/160x120" alt="Project Photo"/>
+			<h2>A tiny project</h2>
+			<p>Aute messenger bag ea, aliquip vegan gluten-free blog.</p>
+		      </div>
+		    </li>
+		    <li class="span2">
+		      <div class="thumbnail">
+			<img src="http://placehold.it/160x120" alt="Project Photo"/>
+			<h2>Demo Derby</h2>
+			<p>Scenester ethical keffiyeh twee swag. Letterpress ad pork belly cray kogi aliquip.</p>
+		      </div>
+		    </li>
+		    <li class="span4">
+		      <div class="thumbnail">
+			<img src="http://placehold.it/300x200" alt="Project Photo"/>
+			<h2>Electric Car</h2>
+			<p>Aute messenger bag ea, aliquip vegan gluten-free blog.</p>
+		      </div>
+		    </li>
+		    <li class="span2">
+		      <div class="thumbnail">
+			<img src="http://placehold.it/160x120" alt="Project Photo"/>
+			<h2>Pocket monsters</h2>
+			<p>Aute messenger bag ea, aliquip vegan gluten-free blog.</p>
+		      </div>
+		    </li>
+		  </ul>
+		</div>
+	      </div>
+	    </section>
+
+<!-- <hr/> -->
+
+	    <section id="members" style="display: none">
+	      <div class="row">
+    		<div class="span4">
+    		  <h2 class="title">Members</h2>
+    		</div>
+	      </div>
+	      <div class="row">
+    		<div class="span8">
+    		  <div class="row">
+    		    <div class="span3">
+    
+    		      <img src="http://placehold.it/165x200" alt="Member Photo"/>
+    		    </div>
+    		    <div class="span5">
+    		      <br/><br/>
+    		      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque in tellus. In pharetra consequat augue. In congue. Curabitur pellentesque iaculis eros. Proin magna odio, posuere sed, commodo nec, varius nec, tortor.</p>
+    		    </div>
+    		  </div>
+    		  <div class="row">
+    		    <div class="span3">
+    		      <img src="http://placehold.it/165x200" alt="Member Photo"/>
+    		    </div>
+    		    <div class="span5">
+    		      <br/><br/>
+    		      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque in tellus. In pharetra consequat augue. In congue. Curabitur pellentesque iaculis eros. Proin magna odio, posuere sed, commodo nec, varius nec, tortor.</p>
+    		    </div>
+    		  </div>
+    		</div>
+		  <div class="row">
+		    <div class="span3">
+		      <img src="http://placehold.it/165x200" alt="Member Photo"/>
+		    </div>
+		    <div class="span5">
+		      <br/><br/>
+		      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque in tellus. In pharetra consequat augue. In congue. Curabitur pellentesque iaculis eros. Proin magna odio, posuere sed, commodo nec, varius nec, tortor.</p>
+		    </div>
+		  </div>
+		</div>
+	    </section>
+<!-- 	    <hr/> -->
+	    <section id="events">
+	      <div class="row">
+    		<div class="span4">
+    		  <h2 class="title">Upcoming Events</h2>
+    		</div>
+
+<!--
+    		  <div class="offset4 span2">
+	          	<h2>What's Next:</h2>
+	          </div>
+-->
+	      </div>
+	      {% block calendar %}
+	      {% endblock %}
+	    </section>
+	    <hr/>
+	    <section id="clubs">
+	      <div class="row">
+	      	<div class="span4">
+	      		<h2 class="title">Clubs</h2>
+	      	</div>
+	      </div>
+	      <div class="row">
+		<div class="span12">
+		  <ul class="thumbnails">
+		    <li class="span4">
+		      <div class="thumbnail">
+    		      <a href="http://www.csramakers.org"><img src="assets/img/clubs/csramakers.png" alt="CSRA Makers"></a>
+		      </div>
+		    </li>
+		    <li class="span2">
+		      <div class="thumbnail">
+		          <a href="http://www.hackaugusta.com">
+        		      <img src="assets/img/clubs/HackAugusta.png" alt="Hack Augusta">
+		          </a>
+		      </div>
+		    </li>
+		    <li class="span2">
+		        <div class="thumbnail">
+		            <a href="http://www.meetup.com/Augusta-Linux-User-Group/"><img src="assets/img/clubs/tux.jpg" alt="Augusta Linux User Group">
+    		          Augusta Linux User Group
+		            </a>
+		        </div>
+		    </li>
+		    <li class="span4">
+		      <div class="thumbnail">
+		          <a href="http://smartkids.sc"><img src="assets/img/clubs/Smartkids.png" alt="SmartKids.sc"></a>
+		      </div>
+		    </li>
+		    <li class="span3">
+		      <div class="thumbnail">
+		          <a href="http://www.meetup.com/RefreshAugusta/"><img src="assets/img/clubs/RefreshAugusta.png" alt="RefreshAugusta"></a>
+		      </div>
+		    </li>
+		    <li class="span2">
+		      <div class="thumbnail">
+		          <a href="http://www.augustadevelopers.org/">
+        		      <img src="assets/img/clubs/augdevguildlogo.gif" alt="Augusta Developers Guild">
+        		      <p>Augusta Developers Guild</p>
+		          </a>
+		      </div>
+		    </li>
+		  </ul>
+		</div>
+	      </div>
+	    </section>
+
+
+	      <hr/>
+
+	     <footer>
+	        <p>&copy; theClubhou.se Partners LLC.  All rights reserved.</p>
+	      </footer>
+	
+	    </div> <!-- /cont -->
+	    </div> <!-- /super-cont -->
+	    <!-- Le javascript
+	    ================================================== -->
+	    <!-- Placed at the end of the document so the pages load faster -->
+	    <script src="assets/js/jquery.js"></script>
+	    <script src="assets/js/bootstrap-transition.js"></script>
+	    <script src="assets/js/bootstrap-alert.js"></script>
+	    <script src="assets/js/bootstrap-modal.js"></script>
+	    <script src="assets/js/bootstrap-dropdown.js"></script>
+	    <script src="assets/js/bootstrap-scrollspy.js"></script>
+
+	    <script src="assets/js/bootstrap-tab.js"></script>
+	    <script src="assets/js/bootstrap-tooltip.js"></script>
+	    <script src="assets/js/bootstrap-popover.js"></script>
+	    <script src="assets/js/bootstrap-button.js"></script>
+	    <script src="assets/js/bootstrap-collapse.js"></script>
+	    <script src="assets/js/bootstrap-carousel.js"></script>
+	    <script src="assets/js/bootstrap-typeahead.js"></script>
+
+        <script type="text/javascript">
+          var _gauges = _gauges || [];
+          (function() {
+            var t   = document.createElement('script');
+            t.type  = 'text/javascript';
+            t.async = true;
+            t.id    = 'gauges-tracker';
+            t.setAttribute('data-site-id', '50bf8580f5a1f503df00002f');
+            t.src = '//secure.gaug.es/track.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(t, s);
+          })();
+        </script>
+	</body>
 </html>
+
+
